@@ -2,6 +2,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 export const fetcher = async <T>(
   endpoint: string,
+  locale: string,
   options: RequestInit = {}
 ): Promise<T> => {
   const headers = {
@@ -10,7 +11,7 @@ export const fetcher = async <T>(
     ...options.headers,
   };
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
+  const response = await fetch(`${BASE_URL}${endpoint}?locale=${locale}`, {
     ...options,
     headers,
   });

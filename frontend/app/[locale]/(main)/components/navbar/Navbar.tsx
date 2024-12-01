@@ -4,6 +4,7 @@ import React from "react";
 import LocaleSwitcher from "../locale-switcher/LocaleSwitcher";
 import NavLinks from "./NavLinks";
 import { getNavBarLinks } from "@/api/services";
+import { useLocale } from "next-intl";
 
 // export interface NavLink {
 //   id: number;
@@ -18,7 +19,8 @@ import { getNavBarLinks } from "@/api/services";
 // }
 
 const Navbar = async () => {
-  const { data: navLinks } = await getNavBarLinks();
+  const locale = useLocale();
+  const { data: navLinks } = await getNavBarLinks(locale);
   return (
     <nav className="bg-blue-950">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
