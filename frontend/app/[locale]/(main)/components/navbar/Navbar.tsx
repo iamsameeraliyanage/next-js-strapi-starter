@@ -1,22 +1,23 @@
-"use client";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import React from "react";
 import LocaleSwitcher from "../locale-switcher/LocaleSwitcher";
+import NavLinks from "./NavLinks";
 
-const Navbar = () => {
-  const pathname = usePathname();
+export interface NavLink {
+  id: number;
+  navlink: string;
+  label: string;
+}
 
-  // Navigation links configuration
-  const navLinks = [
-    { href: "/model", label: "Products" },
-    { href: "/about", label: "About Us" },
-    { href: "/contact", label: "Contact" },
-  ];
+async function getAllNavLinks() {
+  const navLinksPromise = await fetch("http://localhost:1337/api/nav-bars");
+  const navLinksData = await navLinksPromise.json();
+  return navLinksData?.data;
+}
 
-  const isActive = (path: string) => pathname === path;
-
+const Navbar = async () => {
+  const navLinks: NavLink[] = await getAllNavLinks();
   return (
     <nav className="bg-blue-950">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -70,19 +71,7 @@ const Navbar = () => {
             </div>
             <div className="hidden sm:ml-auto sm:block">
               <div className="flex space-x-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`rounded-md px-3 py-2 text-sm font-medium ${
-                      isActive(link.href)
-                        ? "bg-blue-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                <NavLinks navLinks={navLinks} />
                 <div>
                   <LocaleSwitcher />
                 </div>
@@ -95,19 +84,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div className="sm:hidden" id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`block rounded-md px-3 py-2 text-base font-medium ${
-                isActive(link.href)
-                  ? "bg-blue-900 text-white"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          <NavLinks navLinks={navLinks} />
         </div>
       </div>
     </nav>
