@@ -3,21 +3,22 @@ import Image from "next/image";
 import React from "react";
 import LocaleSwitcher from "../locale-switcher/LocaleSwitcher";
 import NavLinks from "./NavLinks";
+import { getNavBarLinks } from "@/api/services";
 
-export interface NavLink {
-  id: number;
-  navlink: string;
-  label: string;
-}
+// export interface NavLink {
+//   id: number;
+//   navlink: string;
+//   label: string;
+// }
 
-async function getAllNavLinks() {
-  const navLinksPromise = await fetch("http://localhost:1337/api/nav-bars");
-  const navLinksData = await navLinksPromise.json();
-  return navLinksData?.data;
-}
+// async function getAllNavLinks() {
+//   const navLinksPromise = await fetch("http://localhost:1337/api/nav-bars");
+//   const navLinksData = await navLinksPromise.json();
+//   return navLinksData?.data;
+// }
 
 const Navbar = async () => {
-  const navLinks: NavLink[] = await getAllNavLinks();
+  const { data: navLinks } = await getNavBarLinks();
   return (
     <nav className="bg-blue-950">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

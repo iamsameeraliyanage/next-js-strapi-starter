@@ -1,16 +1,16 @@
 "use client";
 
+import { NavBarLink } from "@/api/types";
 import { Link, usePathname } from "@/i18n/routing";
 import React from "react";
-import { NavLink } from "./Navbar";
 
-const NavLinks = ({ navLinks }: { navLinks: NavLink[] }) => {
+const NavLinks = ({ navLinks }: { navLinks: NavBarLink[] }) => {
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
   return (
     <>
-      {navLinks.map((link: NavLink) => (
+      {navLinks.map((link: NavBarLink) => (
         <Link
           key={link.id}
           href={link.navlink}
