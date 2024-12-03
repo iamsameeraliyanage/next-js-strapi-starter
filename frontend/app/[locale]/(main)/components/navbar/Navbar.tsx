@@ -19,8 +19,7 @@ import { useLocale } from "next-intl";
 // }
 
 const Navbar = async () => {
-  const locale = useLocale();
-  const { data: navLinks } = await getNavBarLinks(locale);
+  const { data: navLinks } = await getNavBarLinks();
   return (
     <nav className="bg-blue-950">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

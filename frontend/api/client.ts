@@ -1,10 +1,12 @@
+import { useLocale } from "next-intl";
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 export const fetcher = async <T>(
   endpoint: string,
-  locale: string,
   options: RequestInit = {}
 ): Promise<T> => {
+  const locale = useLocale();
   const headers = {
     "Content-Type": "application/json",
     // Authorization: `Bearer ${AUTH_TOKEN}`,
