@@ -1,3 +1,3 @@
 export const API_ENDPOINTS = {
-  NAV_LINKS: "/nav-bars",
+  GLOBAL_CONTENT: "/global?populate[0]=navbar&populate[1]=footer",
 };

@@ -1,10 +1,12 @@
-import { useLocale } from "next-intl";
 import { fetcher } from "./client";
 import { API_ENDPOINTS } from "./endpoints";
-import { StrapiResponse, NavBarLink } from "./types";
+import { GlobalContent, StrapiResponse } from "./types";
 
-export const getNavBarLinks = async (
+export const getGlobalContent = async (
   locale: string
-): Promise<StrapiResponse<NavBarLink[]>> => {
-  return fetcher<StrapiResponse<NavBarLink[]>>(API_ENDPOINTS.NAV_LINKS, locale);
+): Promise<StrapiResponse<GlobalContent>> => {
+  return fetcher<StrapiResponse<GlobalContent>>(
+    API_ENDPOINTS.GLOBAL_CONTENT,
+    locale
+  );
 };

@@ -1,5 +1,3 @@
-import { useLocale } from "next-intl";
-
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 export const fetcher = async <T>(
@@ -13,7 +11,12 @@ export const fetcher = async <T>(
     ...options.headers,
   };
 
-  const response = await fetch(`${BASE_URL}${endpoint}?locale=${locale}`, {
+  const url = new URL(`${BASE_URL}${endpoint}`);
+  url.searchParams.append("locale", locale);
+
+  const updatedURLString = url.toString();
+
+  const response = await fetch(updatedURLString, {
     ...options,
     headers,
   });

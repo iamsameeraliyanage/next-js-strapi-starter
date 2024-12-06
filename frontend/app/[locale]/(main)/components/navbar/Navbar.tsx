@@ -3,8 +3,7 @@ import Image from "next/image";
 import React from "react";
 import LocaleSwitcher from "../locale-switcher/LocaleSwitcher";
 import NavLinks from "./NavLinks";
-import { getNavBarLinks } from "@/api/services";
-import { useLocale } from "next-intl";
+import { getGlobalContent } from "@/api/services";
 
 // export interface NavLink {
 //   id: number;
@@ -18,9 +17,10 @@ import { useLocale } from "next-intl";
 //   return navLinksData?.data;
 // }
 
-const Navbar = async () => {
-  const locale = useLocale();
-  const { data: navLinks } = await getNavBarLinks(locale);
+const Navbar = async ({ locale }: { locale: string }) => {
+  const { data: globalContent } = await getGlobalContent(locale);
+  const navLinks = globalContent?.navbar;
+
   return (
     <nav className="bg-blue-950">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

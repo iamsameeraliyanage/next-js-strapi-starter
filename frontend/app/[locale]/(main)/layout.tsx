@@ -24,7 +24,7 @@ export default async function RootLayout({
 
   return (
     <BaseLayout locale={locale}>
-      <Navbar />
+      <Navbar locale={locale} />
       {children}
       <Footer />
     </BaseLayout>

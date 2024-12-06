@@ -10,8 +10,24 @@ export interface StrapiResponse<T> {
   };
 }
 
+export interface GlobalContent {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string;
+  navbar: NavBarLink[];
+  footer: {
+    id: number;
+    name: string;
+    description: string;
+  };
+}
+
 export interface NavBarLink {
   id: number;
-  label: string;
-  navlink: string;
+  name: string;
+  link: string;
+  idn: number;
 }
