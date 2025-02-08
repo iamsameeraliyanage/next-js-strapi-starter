@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
